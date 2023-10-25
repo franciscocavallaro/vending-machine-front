@@ -1,0 +1,40 @@
+.vending-machine {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.product-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-item:hover {
+    background-color: #f0f0f0;
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.selected-product {
+    margin: 20px 0;
+}
+
+.selected-product h2 {
+    font-size: 1.2em;
+}
+
+.selected-product p:empty {
+    color: #888;
+    font-style: italic;
+}
