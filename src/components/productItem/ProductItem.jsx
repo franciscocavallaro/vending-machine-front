@@ -14,7 +14,7 @@ const ProductItem = ({ product, onSelect }) => {
                 <p style={{display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: 35 }}>Disponible</p>
+                    height: 35 }}>Available</p>
             )}
         </div>
     );

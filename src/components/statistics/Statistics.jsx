@@ -13,9 +13,9 @@ const Statistics = () => {
 
     return (
         <div className="statistics">
-            <h1>Estadísticas</h1>
+            <h1>Statistics</h1>
 
-            <h2 className="bold">Últimas 10 transacciones</h2>
+            <h2 className="bold">Last 10 Transactions</h2>
             {mockTransacctions.map((transaction) => (
                 <text>
                     {transaction}
@@ -23,7 +23,7 @@ const Statistics = () => {
                 )
             )}
 
-            <h2 className="bold">Productos más vendidos</h2>
+            <h2 className="bold">Most sold Products</h2>
             {mostSoldProducts.map((product) => (
                     <text>
                         {product}
@@ -31,7 +31,7 @@ const Statistics = () => {
                 )
             )}
 
-            <h2 className="bold">Recadudación del día</h2>
+            <h2 className="bold">Day Revenue</h2>
             {totalDayRevenue}
 
 
@@ -46,7 +46,7 @@ const Statistics = () => {
                             width: 200,
                             marginTop: 50
                         }}>
-                    Volver al inicio
+                    Back to Home
                 </button>
             </div>
         </div>

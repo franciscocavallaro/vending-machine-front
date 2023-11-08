@@ -13,8 +13,8 @@ function App() {
                     <h1 style={{ marginLeft: 20 }}>Vending Machine Screen</h1>
                 </div>
                 <Routes>
-                    <Route path="/home" element={<VendingMachine />} />
-                    <Route path="/admin" element={<Statistics />} />
+                    <Route path="/" element={<VendingMachine />} />
+                    <Route path="/statistics" element={<Statistics />} />
                 </Routes>
             </div>
         </Router>
