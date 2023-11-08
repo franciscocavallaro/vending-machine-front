@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import ProductItem from '../productItem/ProductItem';
-import './styles.css';
+import "./styles.css";
 
 const productsData = [
     {id: 1, name: 'Producto 1', price: 2.5, image: 'product1.jpg'},
