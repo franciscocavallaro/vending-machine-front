@@ -20,6 +20,16 @@ export const fetchMostSoldProducts = async () => {
         console.error('Error fetching most sold products:', error);
         throw error;
     }
-}
+};
 
-
+export const fetchDayRevenue = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/api/day-revenue');
+        const data = await response.json();
+        console.log('Today\'s Revenue:', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching today\'s revenue:', error);
+        throw error;
+    }
+};
