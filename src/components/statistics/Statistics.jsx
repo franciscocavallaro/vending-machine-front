@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "./styles.css";
-import {fetchLatestTransactions} from "../../service/apis.js";
+import {fetchLatestTransactions, fetchMostSoldProducts} from "../../service/apis.js";
 
 const Statistics = () => {
 
     const navigate = useNavigate();
 
-    const mostSoldProducts = ["Ibupirac", "Paracetamol", "Aspirina"]
     const totalDayRevenue = 1000;
     const [latestTransactions, setLatestTransactions] = useState(["product 1", "product 2"])
+    const [mostSoldProducts, setMostSoldProducts] = useState(["Ibupirac", "Paracetamol", "Aspirina"]);
 
     useEffect(() => {
         fetchTransactions().then(r => console.log("Transactions fetched"));
-
+        fetchMostSoldProducts().then(r => console.log("Most sold products fetched"));
     }, []);
 
     const fetchTransactions = async () => {
@@ -38,10 +38,10 @@ const Statistics = () => {
                 )
             )}
 
-            <h2 className="bold">Most sold Products</h2>
+            <h2 className="bold">Most sold Products (Name and amount)</h2>
             {mostSoldProducts.map((product) => (
                     <text>
-                        {product}
+                        {product.name + " - " + product.count}
                     </text>
                 )
             )}

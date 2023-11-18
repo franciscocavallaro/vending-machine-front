@@ -10,4 +10,16 @@ export const fetchLatestTransactions = async () => {
     }
 };
 
+export const fetchMostSoldProducts = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/api/most-sold-products');
+        const data = await response.json();
+        console.log('Most Sold Products:', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching most sold products:', error);
+        throw error;
+    }
+}
+
 
