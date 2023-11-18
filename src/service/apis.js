@@ -1,4 +1,4 @@
-const fetchLatestTransactions = async () => {
+export const fetchLatestTransactions = async () => {
     try {
         const response = await fetch('http://localhost:8080/api/latest-transactions');
         const data = await response.json();
