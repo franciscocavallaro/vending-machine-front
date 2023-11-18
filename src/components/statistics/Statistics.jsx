@@ -12,7 +12,7 @@ const Statistics = () => {
     const [latestTransactions, setLatestTransactions] = useState(["product 1", "product 2"])
 
     useEffect(() => {
-        fetchTransactions();
+        fetchTransactions().then(r => console.log("Transactions fetched"));
 
     }, []);
 
