@@ -32,9 +32,9 @@ const VendingMachine = () => {
     return (
         <div className="vending-machine">
             <div className="product-grid">
-                {Array.from({length: 5}, (_, row) => (
+                {Array.from({length: 6}, (_, row) => (
                     <div key={`row-${row}`} className="product-row">
-                        {Array.from({length: 5}, (_, col) => {
+                        {Array.from({length: 6}, (_, col) => {
                             const index = row * 5 + col;
                             const product = productsData[index];
                             return (
