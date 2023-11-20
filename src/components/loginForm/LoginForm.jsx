@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import "./styles.css";
 
-const AdminLoginForm = () => {
+const LoginForm = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -10,14 +10,18 @@ const AdminLoginForm = () => {
     const handleLogin = () => {
         if (username === 'admin' && password === 'password') {
             navigate("/statistics")
-        } else {
+        }
+        if (username === 'restocker' && password === 'password') {
+            navigate("/restocker")
+        }
+        else {
             alert('Username or password incorrect');
         }
     };
 
     return (
         <div>
-            <h2 style={{marginTop: 40}}>Admin Log In</h2>
+            <h2 style={{marginTop: 40}}>Log In</h2>
             <form className="adminForm">
                 <input
                     className="adminFormInput"
@@ -48,4 +52,4 @@ const AdminLoginForm = () => {
     );
 };
 
-export default AdminLoginForm;
+export default LoginForm;
