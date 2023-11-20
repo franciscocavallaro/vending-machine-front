@@ -12,9 +12,9 @@ const Statistics = () => {
     const [mostSoldProducts, setMostSoldProducts] = useState(["Ibupirac", "Paracetamol", "Aspirina"]);
 
     useEffect(() => {
-        fetchTransactions().then(r => console.log("Transactions fetched"));
-        fetchSoldProducts().then(r => console.log("Most sold products fetched"));
-        fetchRevenue().then(r => console.log("Revenue fetched"));
+        fetchTransactions().then();
+        fetchSoldProducts().then();
+        fetchRevenue().then();
     }, []);
 
     const fetchTransactions = async () => {
@@ -23,7 +23,6 @@ const Statistics = () => {
             setLatestTransactions(transactions);
         } catch (error) {
             console.error('Error fetching latest transactions:', error);
-            // Handle error if needed
         }
     };
 
@@ -39,7 +38,7 @@ const Statistics = () => {
     const fetchRevenue = async () => {
         try {
             const revenue = await fetchDayRevenue();
-            setTotalDayRevenue(revenue);
+            setTotalDayRevenue(revenue.totalRevenue);
         } catch (e) {
             console.log("Error fetching revenue", e);
         }
@@ -52,7 +51,7 @@ const Statistics = () => {
             <h2 className="bold">Last 10 Transactions</h2>
             {latestTransactions.map((transaction) => (
                 <text>
-                    {transaction}
+                    {transaction.productName}
                 </text>
                 )
             )}
@@ -67,7 +66,6 @@ const Statistics = () => {
 
             <h2 className="bold">Day Revenue</h2>
             {totalDayRevenue}
-
 
             <div className="backToHome" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
 
@@ -88,5 +86,5 @@ const Statistics = () => {
 
     );
 }
-
 export default Statistics;
+
