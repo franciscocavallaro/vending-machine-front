@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const fetchLatestTransactions = async () => {
     try {
         const response = await fetch('http://localhost:8080/api/latest-transactions');
@@ -43,3 +45,17 @@ export const fetchProducts = async () => {
         throw error;
     }
 };
+
+export const restock = async (productId, quantity) => {
+    try {
+        const response = await axios.post('http://localhost:8080/api/restock', {
+            productId: productId,
+            quantity: quantity
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error en la solicitud de restock:', error);
+        throw error;
+    }
+};
+

@@ -1,12 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./styles.css";
 import {useNavigate} from "react-router-dom";
 import ProductItem from "../productItem/ProductItem";
-
-const productsData = [
-    {id: 1, name: 'Product 1', price: 2.5, image: 'product1.jpg'},
-    {id: 2, name: 'Product 2', price: 3.0, image: 'product2.jpg'},
-];
+import {fetchProducts, restock} from "../../service/apis";
 
 const Restocker = () => {
 
@@ -14,8 +10,30 @@ const Restocker = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [productAmount, setProductAmount] = useState(0);
 
-    const handleRestock = () => {
+    const [productsData, setProductsData] = useState(undefined);
+    const [restockTrigger, setRestockTrigger] = useState(false);
 
+
+    useEffect(() => {
+        fetchProducts().then((products) => {
+            const updatedProducts = products.reduce((acc, product) => {
+                if (product.stock > 1) {
+                    const productCopies = Array.from({length: product.stock}, () => ({...product}));
+                    acc.push(productCopies);
+                } else {
+                    acc.push([product]);
+                }
+                return acc;
+            }, []);
+
+            setProductsData(updatedProducts);
+        });
+    }, [restockTrigger]);
+
+    const handleRestock = () => {
+        restock(selectedProduct.productId, productAmount).then(() => {
+            navigate("/restocker");
+        })
     }
 
     return (
@@ -23,24 +41,34 @@ const Restocker = () => {
             <h1 className="restock-header">Restocker</h1>
 
             <div className="vending-machine">
-                <div className="product-grid">
-                    {Array.from({length: 6}, (_, row) => (
-                        <div key={`row-${row}`} className="product-row">
-                            {Array.from({length: 6}, (_, col) => {
-                                const index = row * 5 + col;
-                                const product = productsData[index];
-                                return (
-                                    <div key={`col-${col}`}>
-                                        <ProductItem
-                                            product={product}
-                                            onSelect={(product) => setSelectedProduct(product)}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ))}
-                </div>
+                {productsData && (
+
+                    <div className="product-grid">
+                        {Array.from({length: 6}, (_, col) => (
+                            <div key={`col-${col}`}>
+                                {Array.from({length: 6}, (_, row) => {
+                                    const index = row * 6 + col; // Utiliza 6 en lugar de 5 si el índice comienza desde 0
+
+                                    const product = productsData[col]?.[row];
+                                    if (product) {
+                                        return (
+                                            <div key={`row-${row}`} className={`product-row ${product.stock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+                                                <ProductItem
+                                                    product={product}
+                                                    onSelect={(product) => setSelectedProduct(product)}
+                                                />
+                                            </div>
+                                        );
+                                    } else {
+                                        // Si no hay stock, puedes renderizar un div vacío o null
+                                        return <div key={`col-${col}`}/>;
+                                    }
+                                })}
+                            </div>
+                        ))}
+                    </div>
+                )}
+
 
                 <div className="selected-product">
                     {selectedProduct ? (

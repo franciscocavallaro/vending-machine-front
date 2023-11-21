@@ -29,3 +29,10 @@
     margin-left: 20px;
     margin-bottom: 80px;
 }
+
+.out-of-stock {
+    color: red;
+}
+.in-stock {
+    color: green;
+}
